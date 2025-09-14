@@ -32,6 +32,6 @@ WITH all_players AS (
 )
 
 SELECT
-  MD5(CONCAT(id,last_name,first_name,hitter,game_id)) AS player_id,
+  id as player_id,
   *
 FROM all_players

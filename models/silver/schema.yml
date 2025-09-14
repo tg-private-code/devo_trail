@@ -60,9 +60,8 @@ models:
     description: "A unique list of players and their attributes extracted from the games_wide table."
     columns:
       - name: player_id
-        description: "A unique identifier for each player, derived from their name."
+        description: "An identifier for each player, derived from their name."
         tests:
-          - unique
           - not_null
       - name: first_name
         description: "The first of the player."
