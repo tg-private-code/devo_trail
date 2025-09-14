@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: baseball
+    database: bigquery-public-data
+    schema: baseball
+    tables:
+      - name: games_wide
+      - name: schedules

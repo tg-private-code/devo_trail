@@ -13,9 +13,8 @@ WITH all_teams AS (
   FROM {{ source('baseball', 'games_wide') }}
 )
 
-SELECT
+SELECT DISTINCT
   LOWER(team_name) AS team_name,
   -- We'll use a hash to create a unique ID for each team
   md5(LOWER(team_name)) AS team_id
 FROM all_teams
-group by team_name

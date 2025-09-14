@@ -1,0 +1,92 @@
+version: 2
+
+models:
+  - name: gold_fct_games
+    description: "The central fact table for the baseball star schema, combining all game-related metrics and dimensions for reporting."
+    columns:
+      - name: game_id
+        description: "The unique identifier for a game. Serves as the primary key for the fact table."
+        tests:
+          - unique
+          - not_null
+      - name: game_date
+        description: "The date the game was played."
+      - name: game_time
+        description: "The local time the game started."
+      - name: attendance
+        description: "The official game attendance."
+      - name: home_runs
+        description: "The number of runs scored by the home team."
+      - name: visitor_runs
+        description: "The number of runs scored by the visiting team."
+      - name: year
+        description: "The year the game was played."
+      - name: type
+        description: "The type of game (e.g., regular season, postseason)."
+      - name: day_night
+        description: "Indicates if the game was played during the day or at night."
+      - name: home_team_id
+        description: "The unique ID for the home team."
+      - name: home_team_name
+        description: "The name of the home team."
+      - name: away_team_id
+        description: "The unique ID for the away team."
+      - name: away_team_name
+        description: "The name of the away team."
+      - name: venue_id
+        description: "The unique ID of the venue."
+
+  - name: gold_dim_teams
+    description: "A dimension table containing descriptive information about each team."
+    columns:
+      - name: team_id
+        description: "The unique identifier for a team."
+        tests:
+          - unique
+          - not_null
+      - name: team_name
+        description: "The full name of the team."
+
+  - name: gold_dim_players
+    description: "A dimension table containing descriptive information about each player."
+    columns:
+      - name: player_id
+        description: "The unique identifier for each player."
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "The first of the player."
+      - name: last_name
+        description: "The last of the player."
+      - name: hitter
+        description: "flag to indicate if the player is a hitter"
+      - name: hitter_weight
+        description: "The weight of the hitter"
+      - name: hitter_height
+        description: "The height of the hitter"
+      - name: hitter_bat_hand
+        description: "The hand the player bats with (L/R/B or U for unknown)."
+      - name: pitcher_hand
+        description: "The hand the player pitches with (L/R or U for unknown)."
+      - name: pitch_type
+        description: "The type of pitch"
+
+  - name: gold_dim_venues
+    description: "A dimension table containing descriptive information about each venue."
+    columns:
+      - name: venue_id
+        description: "The unique ID of the venue"
+        tests:
+          - unique
+          - not_null
+      - name: venue_name
+        description: "The name of the venue"
+      - name: venue_capacity
+        description: "The maximum capacity of the venue"
+      - name: venue_street
+        description: "The street the venue is located"
+      - name: venue_state
+        description: "The state the venue is located in"
+      - name: venue_zipcode
+        description: "the zipcode of the venue location"

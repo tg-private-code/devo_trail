@@ -1,0 +1,122 @@
+version: 2
+
+models:
+  - name: silver_games
+    description: "Cleaned and structured data about baseball games from the public dataset. This is the single source of truth for game-level data."
+    columns:
+      - name: game_id
+        description: "The unique identifier for a single game."
+        tests:
+          - unique
+          - not_null
+      - name: game_date
+        description: "The date the game was played."
+      - name: game_time
+        description: "The local time the game started."
+      - name: home_team
+        description: "The name of the home team."
+      - name: visitor_team
+        description: "The name of the visiting team."
+      - name: venue_id
+        description: "the unique id of the venue where the game was played"
+      - name: attendance
+        description: "The number of people who attended the game."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              column_type_list: ['INTEGER', 'NUMERIC']
+      - name: home_final_runs
+        description: "Amount of home runs from the home team"
+      - name: away_final_runs
+        description: "amount of home runs for the away team"
+
+  - name: silver_teams
+    description: "Cleaned data about baseball teams. This serves as a dimension table for team information."
+    columns:
+      - name: team_id
+        description: "The unique identifier for a team."
+        tests:
+          - unique
+          - not_null
+      - name: team_name
+        description: "The full name of the team."
+
+  - name: silver_venues
+    description: "table containing all venues"
+    columns:
+      - name: venue_id
+        description: "The unique ID of the venue"
+        tests:
+          - unique
+          - not null
+      - name: venue_name
+        description: "The name of the venue"
+      - name: venue_capacity
+        description: "The maximum capacity of the venue"
+      - name: venue_street
+        description: "The street the venue is located"
+      - name: venue_state
+        description: "The state the venue is located in"
+      - name: venue_zipcode
+        description: "the zipcode of the venue location"
+
+  - name: silver_players
+    description: "A unique list of players and their attributes extracted from the games_wide table."
+    columns:
+      - name: player_id
+        description: "A unique identifier for each player, derived from their name."
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "The first of the player."
+      - name: last_name
+        description: "The last of the player."
+      - name: hitter
+        description: "flag to indicate if the player is a hitter"
+      - name: hitter_weight
+        description: "The weight of the hitter"
+      - name: hitter_height
+        description: "The height of the hitter"
+      - name: hitter_bat_hand
+        description: "The hand the player bats with (L/R/B or U for unknown)."
+      - name: pitcher_hand
+        description: "The hand the player pitches with (L/R or U for unknown)."
+      - name: pitch_type
+        description: "The type of pitch"
+
+  - name: silver_schedules
+    description: "Cleaned and structured data from the schedules table. This provides a detailed schedule for all games."
+    columns:
+      - name: game_id
+        description: "The unique identifier for a game."
+        tests:
+          - unique
+          - not_null
+      - name: game_number
+        description: "The game number within a series or season."
+      - name: year
+        description: "The year the game was played."
+      - name: type
+        description: "The type of game (e.g., regular season, postseason)."
+      - name: day_night
+        description: "Indicates if the game was played during the day or at night."
+      - name: duration
+        description: "The duration of the game in hours and minutes."
+      - name: duration_minutes
+        description: "The duration of the game in minutes."
+      - name: home_team_id
+        description: "The unique ID for the home team."
+      - name: home_team_name
+        description: "The name of the home team."
+      - name: away_team_id
+        description: "The unique ID for the away team."
+      - name: away_team_name
+        description: "The name of the away team."
+      - name: start_time
+        description: "The timestamp when the game started."
+      - name: attendance
+        description: "The official game attendance."
+      - name: status
+        description: "The current status of the game (e.g., final)."
+      - name: created
+        description: "The timestamp when the record was created."

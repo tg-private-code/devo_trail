@@ -3,16 +3,15 @@
     description='Cleaned and structured data about baseball games from the public dataset.'
 ) }}
 
-SELECT
+SELECT DISTINCT
     gameId AS game_id,
     extract(DATE from startTime) AS game_date,
     extract(TIME from startTime) AS game_time,
     homeTeamName AS home_team,
     awayTeamName AS visitor_team,
-    venueid
+    venueid as venue_id,
     attendance,
-    homeFinalRuns,
-    awayFinalRuns
+    homeFinalRuns as home_final_runs,
+    awayFinalRuns as away_final_runs
 FROM {{ source('baseball', 'games_wide') }}
 WHERE gameId IS NOT NULL
-group by gameid
