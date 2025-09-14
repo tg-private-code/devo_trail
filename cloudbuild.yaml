@@ -2,23 +2,17 @@ substitutions:
   _DBT_FLAGS: "" # Default value is an empty string
 
 steps:
-  # Upgrade pip
-  - name: 'python:3.13'
-    entrypoint: python
-    args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
-
-  # Install dbt and its requirements
-  - name: 'python:3.13'
-    entrypoint: pip
-    args: ['install', '-r', 'requirements.txt']
-
-  # Run the dbt commands
-  - name: 'python:3.13'
+  # Use dbt's official BigQuery image so dependencies are preinstalled
+  - name: 'ghcr.io/dbt-labs/dbt-bigquery:1.8.6'
     entrypoint: 'bash'
     args:
-      - -c
+      - -lc
       - |
-        dbt debug --target dev && dbt build $_DBT_FLAGS --profiles-dir . --target dev      
+        set -euo pipefail
+        dbt --version
+        # Use a dedicated CI target (recommended) or adjust to your target name
+        dbt debug --profiles-dir . --target ci
+        dbt build $_DBT_FLAGS --profiles-dir . --target ci
 
 options:
   logging: CLOUD_LOGGING_ONLY

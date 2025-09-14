@@ -1,0 +1,24 @@
+devo_trail:
+  outputs:
+    dev:
+      dataset: devo_redsox
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: "C:/Users/TGasp/Downloads/devo-trail-4d857d04b9fb.json"
+      location: US
+      method: service-account
+      priority: interactive
+      project: devo-trail
+      threads: 1
+      type: bigquery
+    ci:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('PROJECT_ID') }}"
+      dataset: "{{ env_var('DBT_DATASET', 'devo_redsox') }}"
+      location: "{{ env_var('DBT_LOCATION', 'US') }}"
+      threads: 4
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      priority: interactive
+  target: dev
