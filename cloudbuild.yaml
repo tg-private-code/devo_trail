@@ -3,17 +3,17 @@ substitutions:
 
 steps:
   # Upgrade pip
-  - name: 'python:3.9'
+  - name: 'python:3.11'
     entrypoint: python
     args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
 
   # Install dbt and its requirements
-  - name: 'python:3.9'
+  - name: 'python:3.11'
     entrypoint: pip
     args: ['install', '-r', 'requirements.txt']
 
   # Run the dbt commands
-  - name: 'python:3.9'
+  - name: 'python:3.11'
     entrypoint: 'bash'
     args:
       - -c
