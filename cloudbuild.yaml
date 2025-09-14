@@ -5,7 +5,7 @@ steps:
   # Install dbt and its BigQuery adapter
   - name: 'python:3.9'
     entrypoint: pip
-    args: ['install', 'dbt-bigquery']
+    args: ['install', '-r' 'requirements.txt']
 
   # Run the dbt commands
   - name: 'python:3.9'
