@@ -3,7 +3,7 @@ substitutions:
 
 steps:
   # Upgrade pip
-  - name: 'pip update'
+  - name: 'pip_update'
   - entrypoint: python
   - args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
 
