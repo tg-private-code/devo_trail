@@ -12,7 +12,8 @@ WITH all_players AS (
         hitterHeight as hitter_height,
         hitterBatHand as hitter_bad_hand,
         "" as pitcher_hand,
-        "" as pitch_type
+        "" as pitch_type,
+        gameId as game_id
      FROM {{ source('baseball', 'games_wide') }}
      UNION ALL
      SELECT DISTINCT
@@ -23,11 +24,12 @@ WITH all_players AS (
          0 as hitter_height,
          "" as hitter_bad_hand,
          pitcherThrowHand as pitcher_hand,
-         pitchType as pitch_type
+         pitchType as pitch_type,
+         gameId as game_id
      FROM {{ source('baseball', 'games_wide') }}
 )
 
 SELECT
-  MD5(CONCAT(last_name,first_name,hitter)) AS player_id,
+  MD5(CONCAT(last_name,first_name,hitter,game_id)) AS player_id,
   *
 FROM all_players

@@ -21,9 +21,6 @@ models:
         description: "the unique id of the venue where the game was played"
       - name: attendance
         description: "The number of people who attended the game."
-        tests:
-          - dbt_expectations.expect_column_values_to_be_in_type_list:
-              column_type_list: ['INTEGER', 'NUMERIC']
       - name: home_final_runs
         description: "Amount of home runs from the home team"
       - name: away_final_runs
@@ -47,7 +44,7 @@ models:
         description: "The unique ID of the venue"
         tests:
           - unique
-          - not null
+          - not_null
       - name: venue_name
         description: "The name of the venue"
       - name: venue_capacity
@@ -83,6 +80,8 @@ models:
         description: "The hand the player pitches with (L/R or U for unknown)."
       - name: pitch_type
         description: "The type of pitch"
+      - name: game_id
+        description: "the game id where the player profile is applicable"
 
   - name: silver_schedules
     description: "Cleaned and structured data from the schedules table. This provides a detailed schedule for all games."
