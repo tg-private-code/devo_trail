@@ -3,22 +3,22 @@ substitutions:
 
 steps:
   # Upgrade pip
-  - name: 'python:3.11'
+  - name: 'python:3.13'
     entrypoint: python
     args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
 
   # Install dbt and its requirements
-  - name: 'python:3.11'
+  - name: 'python:3.13'
     entrypoint: pip
     args: ['install', '-r', 'requirements.txt']
 
   # Run the dbt commands
-  - name: 'python:3.11'
+  - name: 'python:3.13'
     entrypoint: 'bash'
     args:
       - -c
       - |
-        python -m dbt debug --target dev && dbt build $_DBT_FLAGS --profiles-dir . --target dev      
+        dbt debug --target dev && dbt build $_DBT_FLAGS --profiles-dir . --target dev      
 
 options:
   logging: CLOUD_LOGGING_ONLY
