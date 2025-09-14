@@ -3,7 +3,7 @@ substitutions:
 
 steps:
   # Upgrade pip
-  - name: 'pip_update'
+  - name: 'python:3.9'
     entrypoint: python
     args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
 
@@ -13,7 +13,7 @@ steps:
     args: ['install', '-r', 'requirements.txt']
 
   # Run the dbt commands
-  - name: 'dbt_run'
+  - name: 'python:3.9'
     entrypoint: 'bash'
     args:
       - -c
