@@ -1,0 +1,17 @@
+substitutions:
+  _DBT_FLAGS: "" # Default value is an empty string
+
+steps:
+  # Install dbt and its BigQuery adapter
+  - name: 'python:3.9'
+    entrypoint: pip
+    args: ['install', 'dbt-bigquery']
+
+  # Run the dbt commands
+  - name: 'python:3.9'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        dbt debug --target dev
+        dbt build $_DBT_FLAGS --profiles-dir . --target dev      
