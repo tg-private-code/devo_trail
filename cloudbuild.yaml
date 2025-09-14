@@ -15,3 +15,7 @@ steps:
       - |
         dbt debug --target dev
         dbt build $_DBT_FLAGS --profiles-dir . --target dev      
+
+build:
+  options:
+    logging: CLOUD_LOGGING_ONLY
