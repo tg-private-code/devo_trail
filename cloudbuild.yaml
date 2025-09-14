@@ -5,10 +5,10 @@ steps:
   # Install dbt and its BigQuery adapter
   - name: 'python:3.9'
     entrypoint: pip
-    args: ['install', '-r' 'requirements.txt']
+    args: ['install', '-r', 'requirements.txt']
 
   # Run the dbt commands
-  - name: 'python:3.9'
+  - name: 'dbt_run'
     entrypoint: 'bash'
     args:
       - -c
