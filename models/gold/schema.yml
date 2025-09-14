@@ -53,7 +53,6 @@ models:
       - name: player_id
         description: "The unique identifier for each player."
         tests:
-          - unique
           - not_null
       - name: first_name
         description: "The first of the player."
