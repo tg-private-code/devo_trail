@@ -5,6 +5,7 @@
 
 WITH all_players AS (
     SELECT DISTINCT
+        hitterId as id,
         hitterLastName as last_name,
         hitterFirstName as first_name,
         1 as hitter,
@@ -17,6 +18,7 @@ WITH all_players AS (
      FROM {{ source('baseball', 'games_wide') }}
      UNION ALL
      SELECT DISTINCT
+         pitcherId as id,
          pitcherLastName as last_name,
          pitcherFirstName as first_name,
          0 as hitter,
@@ -30,6 +32,6 @@ WITH all_players AS (
 )
 
 SELECT
-  MD5(CONCAT(last_name,first_name,hitter,game_id)) AS player_id,
+  MD5(CONCAT(id,last_name,first_name,hitter,game_id)) AS player_id,
   *
 FROM all_players
