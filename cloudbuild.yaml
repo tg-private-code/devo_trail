@@ -18,7 +18,7 @@ steps:
     args:
       - -c
       - |
-        dbt debug --target dev && dbt build $_DBT_FLAGS --profiles-dir . --target dev      
+        python -m dbt debug --target dev && dbt build $_DBT_FLAGS --profiles-dir . --target dev      
 
 options:
   logging: CLOUD_LOGGING_ONLY
