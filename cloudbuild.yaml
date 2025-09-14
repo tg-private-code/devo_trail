@@ -5,6 +5,8 @@ steps:
   # Use a single Python-based step and install dbt-bigquery via pip to avoid GHCR pulls
   - name: 'python:3.11'
     entrypoint: 'bash'
+    env:
+      - "PROJECT_ID=$PROJECT_ID"
     args:
       - -lc
       - |

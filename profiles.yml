@@ -14,7 +14,7 @@ devo_trail:
     ci:
       type: bigquery
       method: oauth
-      project: "{{ env_var('PROJECT_ID') }}"
+      project: "{{ env_var('PROJECT_ID', 'devo-trail') }}"
       dataset: "{{ env_var('DBT_DATASET', 'devo_redsox') }}"
       location: "{{ env_var('DBT_LOCATION', 'US') }}"
       threads: 4
