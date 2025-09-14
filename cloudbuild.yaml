@@ -2,7 +2,12 @@ substitutions:
   _DBT_FLAGS: "" # Default value is an empty string
 
 steps:
-  # Install dbt and its BigQuery adapter
+  # Upgrade pip
+  - name: 'pip update'
+  - entrypoint: python
+  - args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
+
+  # Install dbt and its requirements
   - name: 'python:3.9'
     entrypoint: pip
     args: ['install', '-r', 'requirements.txt']
