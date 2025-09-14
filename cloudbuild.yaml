@@ -4,8 +4,8 @@ substitutions:
 steps:
   # Upgrade pip
   - name: 'pip_update'
-  - entrypoint: python
-  - args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
+    entrypoint: python
+    args: [ '-m', 'pip', 'install', '--upgrade', 'pip' ]
 
   # Install dbt and its requirements
   - name: 'python:3.9'
