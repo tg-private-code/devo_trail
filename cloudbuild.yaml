@@ -1,5 +1,6 @@
 substitutions:
   _DBT_FLAGS: "" # Default value is an empty string
+  _DBT_DATASET: "devo_redsox" # Default dataset; override per build/trigger
 
 steps:
   # Use a single Python-based step and install dbt-bigquery via pip to avoid GHCR pulls
@@ -7,6 +8,7 @@ steps:
     entrypoint: 'bash'
     env:
       - "PROJECT_ID=$PROJECT_ID"
+      - "DBT_DATASET=$_DBT_DATASET"
     args:
       - -lc
       - |
