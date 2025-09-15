@@ -7,3 +7,4 @@ sources:
     tables:
       - name: games_wide
       - name: schedules
+      - name: games_post_wide
