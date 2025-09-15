@@ -112,7 +112,7 @@ models:
         description: "The hand the player bats with (L/R/B or U for unknown)."
         tests:
           - accepted_values:
-              values: ['L', 'R', 'B', 'U']
+              values: ['L', 'R', 'B', 'U','']
       - name: pitcher_hand
         description: "The hand the player pitches with (L/R or U for unknown)."
         tests:
