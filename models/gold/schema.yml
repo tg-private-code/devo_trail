@@ -60,6 +60,65 @@ models:
         tests:
           - not_null
 
+  - name: gold_fct_games_post
+    description: "The central fact table for the baseball post season star schema, combining all game-related metrics and foreign keys for analysis."
+    columns:
+      - name: game_id
+        description: "The unique identifier for a game. Serves as the primary key for the fact table."
+        tests:
+          - unique
+          - not_null
+
+      - name: home_team_id
+        description: "Foreign key to the teams dimension for the home team."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_teams')
+              field: team_id
+
+      - name: away_team_id
+        description: "Foreign key to the teams dimension for the away team."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_teams')
+              field: team_id
+
+      - name: venue_id
+        description: "Foreign key to the venues dimension."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_venues')
+              field: venue_id
+
+      - name: game_date
+        description: "The date the game was played."
+      - name: year
+        description: "The year the game was played."
+      - name: type
+        description: "The type of game (e.g., regular season, postseason)."
+      - name: day_night
+        description: "Indicates if the game was played during the day or at night."
+
+      - name: attendance
+        description: "The official game attendance."
+        tests:
+          - not_null
+      - name: home_runs
+        description: "The number of runs scored by the home team."
+        tests:
+          - not_null
+      - name: away_runs
+        description: "The number of runs scored by the visiting team."
+        tests:
+          - not_null
+      - name: duration_minutes
+        description: "The total duration of the game in minutes."
+        tests:
+          - not_null
+
   - name: gold_dim_teams
     description: "Dimension table for baseball teams, containing a unique record for each team."
     columns:
@@ -120,3 +179,5 @@ models:
               values: ['L', 'R', 'U', 'B','']
       - name: pitch_type
         description: "The type of pitch."
+      - name: game_id
+        description: "Link to game played"

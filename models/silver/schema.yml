@@ -26,6 +26,31 @@ models:
       - name: away_final_runs
         description: "amount of home runs for the away team"
 
+  - name: silver_games_post
+    description: "Cleaned and structured data about baseball games from the public dataset. This is the single source of truth for game-level data."
+    columns:
+    - name: game_id
+      description: "The unique identifier for a single game."
+      tests:
+        - unique
+        - not_null
+    - name: game_date
+      description: "The date the game was played."
+    - name: game_time
+      description: "The local time the game started."
+    - name: home_team
+      description: "The name of the home team."
+    - name: visitor_team
+      description: "The name of the visiting team."
+    - name: venue_id
+      description: "the unique id of the venue where the game was played"
+    - name: attendance
+      description: "The number of people who attended the game."
+    - name: home_final_runs
+      description: "Amount of home runs from the home team"
+    - name: away_final_runs
+      description: "amount of home runs for the away team"
+
   - name: silver_teams
     description: "Cleaned data about baseball teams. This serves as a dimension table for team information."
     columns:

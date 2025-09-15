@@ -19,6 +19,7 @@ SELECT
     hitter_height,
     hitter_bad_hand,
     pitcher_hand,
-    pitch_type
+    pitch_type,
+    game_id
 FROM player_latest_game
 where rn = 1
