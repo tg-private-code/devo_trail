@@ -40,21 +40,6 @@ FROM games g
 JOIN schedules s
   ON g.game_id = s.game_id
 
-SELECT
-    home_teams.team_name AS home_team_name,
-    away_teams.team_name AS away_team_name,
-    v.venue_name
-FROM {{ ref('silver_games') }} AS g
-LEFT JOIN {{ ref('silver_schedules') }} AS s
-    ON g.game_id = s.game_id
-LEFT JOIN {{ ref('silver_teams') }} AS home_teams
-    ON lower(g.home_team) = home_teams.team_name
-LEFT JOIN {{ ref('silver_teams') }} AS away_teams
-    ON lower(g.visitor_team) = away_teams.team_name
-LEFT JOIN {{ ref('silver_venues') }} AS v
-    ON g.venue_id = v.venue_id
-WHERE g.game_id IS NOT NULL
-
 {% if is_incremental() %}
     AND g.game_date > coalesce((SELECT MAX(game_date) FROM {{ this }}), DATE '1900-01-01')
 {% endif %}
