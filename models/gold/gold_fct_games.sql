@@ -41,5 +41,5 @@ JOIN schedules s
   ON g.game_id = s.game_id
 
 {% if is_incremental() %}
-    AND g.game_date > coalesce((SELECT MAX(game_date) FROM {{ this }}), DATE '1900-01-01')
+WHERE g.game_date > (SELECT COALESCE(MAX(game_date), DATE '1900-01-01') FROM {{ this }})
 {% endif %}
