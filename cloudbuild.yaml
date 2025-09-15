@@ -15,10 +15,6 @@ steps:
         pip install --no-cache-dir --upgrade pip
         pip install --no-cache-dir 'dbt-bigquery~=1.8'
         dbt --version
-        echo 'PWD:' $(pwd)
-        echo 'Tree:' && ls -R
-        echo 'List models dir:' && find models -maxdepth 3 -type f -print || true
-        echo 'Show sources dbt sees:'
         dbt ls --profiles-dir . --target ci --resource-type source || true
         dbt parse --profiles-dir . --target ci
         dbt debug --profiles-dir . --target ci
