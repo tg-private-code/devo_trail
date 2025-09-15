@@ -4,21 +4,45 @@
     description='A central fact table that joins key metrics from silver tables for analytics.'
 ) }}
 
+-- models/gold/gold_fct_games.sql
+WITH games AS (
+    SELECT *
+    FROM {{ ref('silver_games') }}
+),
+
+schedules AS (
+    SELECT *
+    FROM {{ ref('silver_schedules') }}
+)
+
 SELECT
+    -- Primary Key
     g.game_id,
+
+    -- Foreign Keys
+    s.home_team_id,
+    s.away_team_id,
+    g.venue_id,
+
+    -- Degenerate Dimensions (descriptive fields that belong in the fact table)
     g.game_date,
-    g.game_time,
-    g.attendance,
-    g.home_final_runs as home_runs,
-    g.away_final_runs as visitor_runs,
     s.year,
     s.type,
     s.day_night,
-    home_teams.team_id AS home_team_id,
+
+    -- Measures (numeric values for aggregation)
+    COALESCE(g.attendance, s.attendance) AS attendance,
+    g.home_final_runs AS home_runs,
+    g.away_final_runs AS away_runs,
+    s.duration_minutes
+
+FROM games g
+JOIN schedules s
+  ON g.game_id = s.game_id
+
+SELECT
     home_teams.team_name AS home_team_name,
-    away_teams.team_id AS away_team_id,
     away_teams.team_name AS away_team_name,
-    v.venue_id,
     v.venue_name
 FROM {{ ref('silver_games') }} AS g
 LEFT JOIN {{ ref('silver_schedules') }} AS s
