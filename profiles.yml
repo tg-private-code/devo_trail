@@ -11,6 +11,28 @@ devo_trail:
       project: devo-trail
       threads: 1
       type: bigquery
+    tst:
+      dataset: devo_redsox_tst
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: "C:/Users/TGasp/Downloads/devo-trail-4d857d04b9fb.json"
+      location: US
+      method: service-account
+      priority: interactive
+      project: devo-trail
+      threads: 1
+      type: bigquery
+    prd:
+      dataset: devo_redsox_prd
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: "C:/Users/TGasp/Downloads/devo-trail-4d857d04b9fb.json"
+      location: US
+      method: service-account
+      priority: interactive
+      project: devo-trail
+      threads: 1
+      type: bigquery
     ci:
       type: bigquery
       method: oauth
