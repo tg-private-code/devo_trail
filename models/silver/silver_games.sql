@@ -14,4 +14,4 @@ SELECT DISTINCT
     homeFinalRuns as home_final_runs,
     awayFinalRuns as away_final_runs
 FROM {{ source('baseball', 'games_wide') }}
-WHERE gameId IS NOT NULL
+WHERE gameId IS NOT NULL "abcd failure test"
