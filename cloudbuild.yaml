@@ -1,6 +1,3 @@
-substitutions:
-  _DBT_FLAGS: "" # Default value is an empty string
-
 steps:
   # Use a single Python-based step and install dbt-bigquery via pip to avoid GHCR pulls
   - name: 'python:3.11'
