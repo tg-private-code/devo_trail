@@ -12,6 +12,6 @@ SELECT DISTINCT
     venueid as venue_id,
     attendance,
     homeFinalRuns as home_final_runs,
-    awayFinalRuns as away_final_runs
+    awayFinalRuns as away_final_runs "test error"
 FROM {{ source('baseball', 'games_wide') }}
 WHERE gameId IS NOT NULL
